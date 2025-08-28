@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brand Portfolio</title>
+
+  <style>
+    @font-face {
+      font-family: 'Voyage';
+      src: url('./assets/fonts/voyage-bold.otf') format('opentype');
+      font-weight: bold;
+      font-style: normal;
+    }
+
+    :root {
+      --font-title: 'impact', sans-serif;
+      --font-text: 'impact', sans-serif;
+      --color-bg: #edecec;
+      --color-text: #1d1d1b;
+      --color-accent: #3db8b5;
+      --color-rosa: #D3546D;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html {
+  scroll-behavior: smooth;
+}
+
+/* Platz für die fixe Nav schaffen */
+section {
+  scroll-margin-top: 90px; /* Höhe deiner Nav + etwas Puffer */
+}
+    body {
+      font-family: var(--font-text);
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+    }
+
+    header {
+      height: 60vh;
+      background: url('./Assets/Fotos/Frame\ 3510.png') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #edecec;
+    }
+
+    header h1 {
+      font-family: var(--font-title);
+      font-size: 6rem;
+      background: rgba(0,0,0,0.2);
+      padding: 1rem 2rem;
+      border-radius: 12px;
+    }
+
+    p {
+      font-family: var(--font-title);
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+      text-align: left;
+    }
+    .pklein
+    {
+      font-family: var(--font-title);
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    /* NAVIGATION */
+    nav {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      background: #1D1D1B;
+      padding: 1.2rem;
+      border-bottom: 1px solid #1D1D1B;
+      z-index: 100;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap; /* Für Mobile mehrzeilig */
+      gap: 2rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--color-bg);
+      font-weight: bold;
+      font-family: var(--font-title);
+      font-size: 1.3rem;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #3DB8B5;
+    }
+
+    main {
+      padding: 1rem 5%;
+      max-width: 1250px;
+      margin: auto;
+    }
+
+    .teaser p {
+        margin-top: 150px;
+        margin-bottom: 150px;
+        font-size: 40px; 
+        text-align: center;
+        color: var(--color-text);
+    }
+
+    section {
+      margin-bottom: 6rem;
+      border-bottom: 1px solid var(--color-text);
+      padding-bottom: 3rem;
+    }
+
+
+
+    section h2 {
+      font-family: var(--font-title);
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      color: var(--color-rosa);
+    }
+
+    .grid, .grid2, .grid3 {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .grid img { max-width: 200px; }
+    .grid2 img { max-width: 400px; }
+    .grid3 img { max-width: 600px; }
+
+    .grid img, .grid2 img, .grid3 img {
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .grid img:hover, .grid2 img:hover, .grid3 img:hover {
+      transform: scale(1.05);
+    }
+
+    .download-btn {
+      display: block;
+      margin: 0 auto;
+      width: fit-content;
+      padding: 0.75rem 1.5rem;
+      background: var(--color-text);
+      color: #edecec;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .download-btn:hover {
+      background: var(--color-rosa);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      border-top: 1px solid #ddd;
+    }
+
+    footer a {
+      color: var(--color-rosa);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* MODAL für Bilder */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 2rem;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+    .teaser p{font-size:1.5rem;
+    margin-top: 100px;
+margin-bottom: 100px;}
+      header h1 { font-size: 3.5rem; }
+      nav a { font-size: 1rem; }
+      .grid3 img{max-width: 300px;}
+    }
+
+    @media (max-width: 480px) {
+        .teaser p{font-size:1rem;
+    margin-top: 50px;
+margin-bottom: 50px;}
+      header h1 { font-size: 2.5rem; }
+      .grid2 img{max-width: 250px;}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Headerbereich -->
+  <header>
+    <h1>Shake'ins</h1>
+  </header>
+
+  <!-- Navigation -->
+  <nav>
+    <ul>
+      <li><a href="#stylesheet">Stylesheet</a></li>
+      <li><a href="#logos">Logos</a></li>
+      <li><a href="#farben">Farben</a></li>
+      <li><a href="#schriften">Schriften</a></li>
+      <li><a href="#muster">Muster</a></li>
+      <li><a href="#merch">Merch</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="teaser">
+      <p>Willkommen in Celinas Brand Hub! Hier findet man alles rund um Logos, Farben, Schriften, uvm.</p>
+    </div>
+
+    <!-- Beispiel Section Farben -->
+    <section id="stylesheet">
+      <h2>Stylesheet - Grober Überblick</h2>
+      <p class="pklein">Wie Schrift, Logo, Hintergrund, Muster und viel mehr angewendet werden</p>
+      <a href="./Assets/Downloads/Stylesheet/Stylesheet.pdf.zip" class="download-btn" download>Stylesheet PDF herunterladen</a>
+    </section>
+
+    <!-- Beispiel Section Logos -->
+    <section id="logos">
+      <h2>Logos</h2>
+      <div class="grid">
+        <a href="./Assets/Downloads/svg.zip" class="download-btn" download>SVGs herunterladen</a>
+        <a href="./Assets/Downloads/eps.zip" class="download-btn" download>EPS's herunterladen</a>
+        <a href="./Assets/Downloads/png.zip" class="download-btn" download>PNGs herunterladen</a>
+      </div>
+      <br><br>
+      <p>Hauptlogo</p>
+      <p class="pklein">Hauptlogo für sämtliche Anwendungen</p>
+      <div class="grid">
+        <img src="./Assets/Fotos/Logos/Haupt/Hauptlogo 01.png" alt="Logo-Haupt 1">
+        <img src="./Assets/Fotos/Logos/Haupt/Hauptlogo 02.png" alt="Logo-Haupt 2">
+        <img src="./Assets/Fotos/Logos/Haupt/Hauptlogo 04.png" alt="Logo-Haupt 3">
+        <img src="./Assets/Fotos/Logos/Haupt/Hauptlogo 03.png" alt="Logo-Haupt 4">
+      </div>
+      <a href="./Assets/Downloads/Hauptlogo.zip" class="download-btn" download>Hauptlogo-Set herunterladen</a>
+      <br><br>
+      <p>Icon</p>
+      <p class="pklein">Icon für Muster, Favicon, Social Media, etc.</p>
+      <div class="grid">
+        <img src="./Assets/Fotos/Logos/Icon/Neuer Ordner/Icon-schwarz.png" alt="Logo-Icon schwarz">
+        <img src="./Assets/Fotos/Logos/Icon/Neuer Ordner/Icon-rosa.png" alt="Logo-Icon Rosa">
+        <img src="./Assets/Fotos/Logos/Icon/Neuer Ordner/Icon-türkis.png" alt="Logo-Icon Türkis">
+        <img src="./Assets/Fotos/Logos/Icon/Neuer Ordner/Icon-weiss.png" alt="Logo-Icon weiss">
+      </div>
+      <a href="./Assets/Downloads/Icon.zip" class="download-btn" download>Icon-Set herunterladen</a>
+      <br><br>
+      <p>Logo-Alternative lang</p>
+      <p class="pklein">Lang geschriebenes Logo als ALternative</p>
+      <div class="grid">
+        <img src="./Assets/Fotos/Logos/Schriftlang/Schrift Only 01.png" alt="Logo-Schriftlang Schwarz">
+        <img src="./Assets/Fotos/Logos/Schriftlang/Schrift Only 02.png" alt="Logo-Schriftlang Rosa">
+        <img src="./Assets/Fotos/Logos/Schriftlang/Schrift Only 03.png" alt="Logo-Schriftlang Türkis">
+        <img src="./Assets/Fotos/Logos/Schriftlang/Schrift Only 04.png" alt="Logo-Schriftlang Weiss">
+      </div>
+      <a href="./Assets/Downloads/Logo Lang.zip" class="download-btn" download>Schrift-Set-lang herunterladen</a>
+      <br><br>
+      <p>Logo-Alternative kurz</p>
+      <p class="pklein">Logo als Kürzel</p>
+      <div class="grid">
+        <img src="./Assets/Fotos/Logos/Kürzel/Kürzel-schwarz.png" alt="Logo-Haupt 1">
+        <img src="./Assets/Fotos/Logos/Kürzel/Kürzel-rosa.png" alt="Logo-Haupt 2">
+        <img src="./Assets/Fotos/Logos/Kürzel/Kürzel-türkis.png" alt="Logo-Haupt 3">
+        <img src="./Assets/Fotos/Logos/Kürzel/Kürzel-weiss.png" alt="Logo-Haupt 4">
+      </div>
+      <a href="./Assets/Downloads/Kürzel.zip" class="download-btn" download>Kürzel-Set herunterladen</a>
+    </section>
+
+    <!-- Beispiel Section Farben -->
+    <section id="farben">
+      <h2>Farben</h2>
+      <div class="grid">
+        <img src="./Assets/Fotos/Farb/Frame 3511.png" alt="Schwarz">
+        <img src="./Assets/Fotos/Farb/Frame 3512.png" alt="Rosa">
+        <img src="./Assets/Fotos/Farb/Frame 3513.png" alt="Türkis">
+        <img src="./Assets/Fotos/Farb/Frame 3514.png" alt="Weiss">
+      </div>
+    </section>
+
+    <!-- Beispiel Section Schriften -->
+    <section id="schriften">
+      <h2>Schriften</h2>
+      <div class="grid3">
+        <div class="teaser">
+            <p style="margin: auto;">Ich bin die Impact! Ich bin fast überall einsetzbar (bis auf Logo)</p>
+          </div>
+          <a href="./Assets/Downloads/Impact.zip" class="download-btn" download>Schrift herunterladen</a>
+      </div>
+    </section>
+
+    <!-- Beispiel Section Muster -->
+    <section id="muster">
+      <h2>Muster</h2>
+      <div class="grid">
+        <img src="./Assets/Fotos/Muster/Muster 01.png" alt="Muster Vorschau 1">
+        <img src="./Assets/Fotos/Muster/Muster 2.png" alt="Muster Vorschau 2">
+        <img src="./Assets/Fotos/Muster/Muster 3.png" alt="Muster Vorschau 3">
+        <img src="./Assets/Fotos/Muster/Muster 4.png" alt="Muster Vorschau 4">
+        <img src="./Assets/Fotos/Muster/Muster 5.png" alt="Muster Vorschau 5">
+      </div>
+    </section>
+
+    <!-- Beispiel Section Merch -->
+    <section id="merch">
+      <h2>Merch-Ideen</h2>
+      <p>Sticker</p>
+      <div class="grid2">
+        <img src="./Assets/Fotos/Merch/Sticker/Sticker 01.png" alt="Sticker Vorschau 1">
+        <img src="./Assets/Fotos/Merch/Sticker/Sticker 02.png" alt="Sticker Vorschau 2">
+        <img src="./Assets/Fotos/Merch/Sticker/Sticker 03.png" alt="Sticker Vorschau 3">
+      </div>
+      <br><br><br>
+      <p>Kleidung</p>
+      <p class="pklein">Icon auf Brust mit Hauptlogo hinten</p>
+      <div class="grid2">
+        <img src="./Assets/Fotos/Merch/Shirts/T-Shirts 1.png" alt="Shirts Vorschau 1">
+        <img src="./Assets/Fotos/Merch/Shirts/T-Shirts 2.png" alt="Shirts Vorschau 2">
+        <img src="./Assets/Fotos/Merch/Shirts/T-Shirts 3.png" alt="Shirts Vorschau 3">
+        <img src="./Assets/Fotos/Merch/Shirts/T-Shirts 4.png" alt="Shirts Vorschau 4">
+      </div>
+      <br><br>
+      <p class="pklein">Hauptlogo auf Brust mit Icon hinten</p>
+      <div class="grid2">
+        <img src="./Assets/Fotos/Merch/Shirts/T-Shirts 5.png" alt="Shirts Vorschau 1">
+        <img src="./Assets/Fotos/Merch/Shirts/T-Shirts 6.png" alt="Shirts Vorschau 2">
+        <img src="./Assets/Fotos/Merch/Shirts/T-Shirts 7.png" alt="Shirts Vorschau 3">
+        <img src="./Assets/Fotos/Merch/Shirts/T-Shirts 8.png" alt="Shirts Vorschau 4">
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p style="text-align: center;">Celina Kammerhofer, 2025</p>
+    <p style="text-align: center;"><a href="mailto:celina.kammerhofer@gmail.com">celina.kammerhofer@gmail.com</a></p>
+  </footer>
+
+  <!-- Modal für Bilder -->
+  <div class="modal" id="imageModal">
+    <span class="close-btn" id="closeModal">×</span>
+    <img id="modalImg" src="" alt="">
+  </div>
+
+  <script>
+    const images = document.querySelectorAll('.grid img, .grid2 img, .grid3 img');
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImg');
+    const closeModal = document.getElementById('closeModal');
+
+    images.forEach(img => {
+      img.addEventListener('click', () => {
+        modal.style.display = 'flex';
+        modalImg.src = img.src;
+        modalImg.alt = img.alt;
+      });
+    });
+
+    closeModal.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === "Escape") {
+        modal.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
